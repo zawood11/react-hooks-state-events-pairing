@@ -1,7 +1,17 @@
 import video from "../data/video.js";
+import Video from './Video';
+import CommentList from './CommentList';
+import React, { useState } from 'react';
 
 function App() {
-  console.log("Here's your data:", video);
+  const [showComments, setShowComments] = useState(true);
+
+  const thumbs = ["👍", "👎"];
+  
+  function onHideComments() {
+    setShowComments(!showComments);
+    console.log(showComments);
+  }
 
   return (
     <div className="App">
@@ -13,6 +23,9 @@ function App() {
         allowFullScreen
         title="Thinking in React"
       />
+      <Video video={video} thumbs={thumbs} showComments={showComments} onHideComments={onHideComments}/>
+      <hr />
+      {showComments ? <CommentList video={video} thumbs={thumbs} /> : null}
     </div>
   );
 }
